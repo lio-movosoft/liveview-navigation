@@ -1,27 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="[scrollbar-gutter:stable]">
   <head>
-    <div class="flex flex-row gap-4 p-4 bg-orange-100">
-      <button
-        phx-click={JS.navigate(~p"/users")}
-        class="text-red-900 font-semibold hover:text-red-700"
-      >
-        JSusesrs
-      </button>
-      <.link navigate={~p"/users"} class="text-zinc-900 font-semibold hover:text-zinc-700">
-        users
-      </.link>
-      <button
-        phx-click={JS.navigate(~p"/stuffies")}
-        class="text-red-900 font-semibold hover:text-red-700"
-      >
-        JSstuffies
-      </button>
-      <.link navigate={~p"/stuffies"} class="text-zinc-900 font-semibold hover:text-zinc-700">
-        stuffies
-      </.link>
-    </div>
-
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content={get_csrf_token()} />
@@ -31,6 +10,20 @@
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
     </script>
+    <div class="p-4 flex flex-row gap-4">
+      <.link navigate={~p"/users"} class="text-zinc-900 font-semibold hover:text-zinc-700">
+        nav-users
+      </.link>
+      <.link href={~p"/users"} class="text-zinc-900 font-semibold hover:text-zinc-700">
+        href-users
+      </.link>
+      <.link navigate={~p"/stuffies"} class="text-zinc-900 font-semibold hover:text-zinc-700">
+        nav-stuffies
+      </.link>
+      <.link href={~p"/stuffies"} class="text-zinc-900 font-semibold hover:text-zinc-700">
+        href-stuffies
+      </.link>
+    </div>
   </head>
   <body class="bg-white">
     {@inner_content}
