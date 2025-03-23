@@ -1,0 +1,41 @@
+<.header>
+  Listing Stuffies
+  <:actions>
+    <.link patch={~p"/stuffies/new"}>
+      <.button>New Stuffy</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="stuffies"
+  rows={@streams.stuffies}
+  row_click={fn {_id, stuffy} -> JS.navigate(~p"/stuffies/#{stuffy}") end}
+>
+  <:col :let={{_id, stuffy}} label="Name">{stuffy.name}</:col>
+  <:action :let={{_id, stuffy}}>
+    <div class="sr-only">
+      <.link navigate={~p"/stuffies/#{stuffy}"}>Show</.link>
+    </div>
+    <.link patch={~p"/stuffies/#{stuffy}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, stuffy}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: stuffy.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="stuffy-modal" show on_cancel={JS.patch(~p"/stuffies")}>
+  <.live_component
+    module={Test20Web.StuffyLive.FormComponent}
+    id={@stuffy.id || :new}
+    title={@page_title}
+    action={@live_action}
+    stuffy={@stuffy}
+    patch={~p"/stuffies"}
+  />
+</.modal>
